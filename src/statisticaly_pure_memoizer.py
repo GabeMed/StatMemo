@@ -2,6 +2,7 @@ import numpy as np
 import functools
 import statistics
 import math
+from scipy import stats
 
 class StatisticalyPureMemoizer:
     def __init__(self, number_of_executions, max_error=0.5, confidence_level=0.95):
@@ -23,14 +24,13 @@ class StatisticalyPureMemoizer:
         # TODO HERE
         return 
 
-    
     def _compute_margin_of_error(self, data):
 
         n = len(data)
         if n < 2:
             return float('inf') 
         stdev = statistics.pstdev(data)
-        z = 1.96 
+        z = stats.t.ppf(self.confidence_level, n-1)
         return z * (stdev / math.sqrt(n))
     
     def _execute_and_store(self, f, key, *args):
