@@ -22,6 +22,7 @@ class StatisticalyPureMemoizer:
     def _get_mean_output(self, f, args):
         # TODO HERE
         return 
+
     
     def _compute_margin_of_error(self, data):
 
